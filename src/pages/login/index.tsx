@@ -1,9 +1,9 @@
+import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import React, { useState } from "react";
-import { Image, View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
-import { style } from "./styles";
-import { MaterialIcons, Octicons } from '@expo/vector-icons'
-import { themes } from "../../global/themes";
+import { Alert, Image, Text, View } from "react-native";
+import { Button } from "../../components/button";
 import { Input } from "../../components/input";
+import { style } from "./styles";
 
 export default function Login() {
 
@@ -23,7 +23,9 @@ export default function Login() {
 
 
             if (!email || !password) {
-                return Alert.alert("Login", "Informe os campos obrigatórios!")
+                Alert.alert("Login", "Informe os campos obrigatórios!")
+                setLoading(false);
+                return 
             }
 
             setTimeout(() => {
@@ -37,7 +39,7 @@ export default function Login() {
 
         } catch (error) {
             console.log("Erro: " + error)
-
+            setLoading(false);
         }
 
     }
@@ -84,19 +86,14 @@ export default function Login() {
             </View>
 
             <View style={style.bottomBox}>
-                <TouchableOpacity
-                    style={style.button}
-                    activeOpacity={0.8}
-                    onPress={getLogin}
-                >
-                    {
-                        loading ?
-                            <ActivityIndicator color={'#FFF'} size={"small"} />
-                            :
-                            <Text style={style.buttonText}>Login</Text>
-                    }
+                
+                <Button 
+                    text="Login"   
+                    onPress={getLogin} 
+                    loading={loading}
+                />
 
-                </TouchableOpacity>
+                
                 <Text style={style.bottomText}>Don't have an account? <Text style={style.bottomTextHigh}>Sign up!</Text></Text>
             </View>
 

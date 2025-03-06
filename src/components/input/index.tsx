@@ -20,14 +20,15 @@ type Props = TextInputProps & {
 
 export const Input = forwardRef((props: Props, ref: LegacyRef<TextInput> | null) => {
 
-    const {IconRight, iconRightName, title, onIconRightPress, onIconLeftPress, ...rest } = props
+    const { IconRight, iconRightName, title, onIconRightPress, onIconLeftPress, ...rest } = props
 
 
     return (
         <>
-            <Text style={style.textInput}>
+            {title && <Text style={style.textInput}>
                 {title}
-            </Text>
+            </Text>}
+
 
             <View style={style.boxInput}>
 
