@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Image, View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { style } from "./styles";
-import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialIcons, Octicons } from '@expo/vector-icons'
 import { themes } from "../../global/themes";
+import { Input } from "../../components/input";
 
 export default function Login() {
 
@@ -60,39 +61,26 @@ export default function Login() {
             </View>
 
             <View style={style.midBox}>
+                <Input
+                    title="E-mail Address"
+                    iconRightName="email"
+                    IconRight={MaterialIcons}
+                    value={email}
+                    onChangeText={setEmail}
+                    inputMode="email"
+                />
+                <Input
 
-                <Text style={style.textInput}>E-mail Address</Text>
-                <View style={style.boxInput}>
-                    <TextInput
-                        style={style.input}
-                        inputMode="email"
-                        value={email}
-
-                        onChangeText={(e) => {
-                            setEmail(e)
-                        }}
-                    />
-                    <MaterialIcons name="email" size={24} color={themes.colors.secondary} />
-                </View>
-
-
-                <Text style={style.textInput}>Password</Text>
-                <View style={style.boxInput}>
-                    <TextInput
-                        style={style.input}
-                        inputMode="text"
-                        value={password}
-                        secureTextEntry={showPassword}
-                        onChangeText={(e) => {
-                            setPassword(e)
-                        }}
-                    />
-                    <TouchableOpacity onPress={()=>{showPassword? setShowPassword(false):setShowPassword(true)}}>
-                        <MaterialIcons name="password" size={24} color={themes.colors.secondary} />
-                    </TouchableOpacity>
-
-                </View>
-
+                    value={password}
+                    onChangeText={setPassword}
+                    title="Password"
+                    IconRight={Octicons}
+                    iconRightName={showPassword?"eye":"eye-closed"}
+                    onIconRightPress={() => {
+                        showPassword ? setShowPassword(false) : setShowPassword(true)
+                    }}
+                    secureTextEntry={!showPassword}
+                />
             </View>
 
             <View style={style.bottomBox}>
